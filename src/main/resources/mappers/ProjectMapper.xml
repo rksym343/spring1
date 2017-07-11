@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.persistence.ProjectDAO">
+
+	<insert id="register" parameterType="ProjectVO">
+		INSERT INTO project (p_name, p_detail, start_date, end_date, p_condition)
+		VALUES(#{pName}, #{pDetail}, #{startDate}, #{endDate}, #{pCondition})
+	</insert>
+	
+	<update id="modify" parameterType="ProjectVO">
+		UPDATE project
+		SET p_name=#{pName}, p_detail= #{pDetail}, start_date=#{startDate},
+			 end_date=#{endDate}, p_condition=#{pCondition}
+		WHERE pno=#{pno}		
+	</update>
+	
+	<delete id="remove">
+		DELETE FROM  project WHERE pno=#{pno}
+		
+	</delete>
+	
+	<select id="read" resultType="ProjectVO">
+		SELECT pno, p_name, p_detail, start_date, end_date, p_condition FROM project WHERE pno=#{pno}		
+	</select>
+	
+	<select id="readAll" resultType="ProjectVO">
+		SELECT pno, p_name, p_detail, start_date, end_date, p_condition FROM project 		
+	</select>
+	
+	<select id="lastPno" resultType="int">
+		select max(pno) from project
+	</select>
+	
+</mapper>
+
+
